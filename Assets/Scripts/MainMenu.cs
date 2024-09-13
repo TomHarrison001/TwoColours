@@ -66,4 +66,9 @@ public class MainMenu : MonoBehaviour
     {
         controller.LoadLevel(controller.Level);
     }
+
+    public void QuitGame()
+    {
+        StartCoroutine(controller.Quit());
+    }
 }

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject particles;
     private GameController controller;
     private AudioManager audioManager;
+    private GameObject pauseMenu;
     private float speed = 0.1f, jumpForce = 10f;
     private int newJump = 20;
     private bool jumping = false, paused = false;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     {
         controller = FindObjectOfType<GameController>();
         audioManager = FindObjectOfType<AudioManager>();
+        pauseMenu = GameObject.Find("PauseMenu");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -38,6 +40,14 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         if (paused) return;
+        // esc to pause
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            pauseMenu.GetComponent<PauseMenu>().PlayButtonAudio();
+            pauseMenu.GetComponent<PauseMenu>().PauseGame();
+            pauseMenu.GetComponent<ActivateMenu>().EnableMenu();
+            return;
+        }
         // move
         transform.position += transform.right * speed;
         // jump

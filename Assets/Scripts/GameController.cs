@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
 
     public void LevelComplete()
     {
-        if (level != 10)
+        if (level != 20)
         {
             level++;
             LoadLevel(level);
@@ -144,5 +144,13 @@ public class GameController : MonoBehaviour
         }
         UpdateDeaths();
         StartCoroutine(SceneFadeOut());
+    }
+
+    public IEnumerator Quit()
+    {
+        Debug.Log("Quitting...");
+        StartCoroutine(SceneFadeIn());
+        yield return new WaitForSeconds(0.5f);
+        Application.Quit();
     }
 }
