@@ -63,6 +63,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void MobileJump()
+    {
+        if (!jumping)
+        {
+            jumping = true;
+            newJump = 0;
+            audioManager.Play("jump");
+        }
+    }
+
     private void Jump()
     {
         if (newJump < 10) transform.position += transform.up * jumpForce / (20 * (newJump + 1));
